@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
+import pg from "pg";
 
 let db;
 
@@ -16,7 +17,9 @@ if (process.env.NODE_ENV === "development") {
     }
   );
 } else {
-  db = new Sequelize(process.env.POSTGRES_URL);
+  db = new Sequelize(process.env.POSTGRES_URL, {
+    dialectModule: pg,
+  });
 }
 
 export default db;
