@@ -47,9 +47,15 @@ export default {
       throw customError.badRequestError("Client Error");
     }
 
+    // Find the user
+    const user = await User.findOne({ where: { userId } });
+
     const organisation = await Organisation.create({
       ...organisationData,
     });
+
+    // Attach the user to the organisation
+    await organisation.addUser(user);
 
     return {
       status: "success",

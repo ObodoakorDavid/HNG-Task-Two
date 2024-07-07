@@ -33,7 +33,7 @@ const User = db.define("User", {
   },
   phone: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
 });
 
