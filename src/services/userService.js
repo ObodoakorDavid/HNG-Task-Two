@@ -90,22 +90,57 @@ export default {
     };
   },
   // Get User Record
-  getUserRecord: async function (id) {
-    // Fetch the target user's record
-    const targetUser = await User.findOne({ where: { userId: id } });
-    if (!targetUser) {
+  getUserRecord: async function (userId, id) {
+    const user = await User.findOne({ where: { userId: id } });
+
+    if (!user) {
       throw customError.badRequestError(`User with this Id:${id} Not Found`);
+    }
+
+    if (userId === id) {
+      return {
+        status: "success",
+        message: "User fetched successfully",
+        data: {
+          userId: user.userId,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phone,
+        },
+      };
+    }
+
+    // Check if both users belong to the same organisation
+    const commonOrganisation = await User.findOne({
+      where: { userId },
+      include: {
+        model: Organisation,
+        as: "Organisations",
+        include: {
+          model: User,
+          where: { userId: id },
+          attributes: [],
+          through: { attributes: [] },
+        },
+      },
+    });
+
+    if (commonOrganisation.Organisations.length < 1) {
+      throw customError.badRequestError(
+        `You don't share a common organisation with this user`
+      );
     }
 
     return {
       status: "success",
       message: "User fetched successfully",
       data: {
-        userId: targetUser.userId,
-        firstName: targetUser.firstName,
-        lastName: targetUser.lastName,
-        email: targetUser.email,
-        phone: targetUser.phone,
+        userId: user.userId,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
       },
     };
   },

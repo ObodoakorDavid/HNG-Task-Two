@@ -44,7 +44,7 @@ const startServer = async () => {
       console.log(`Server is Live! Running on PORT: ${port}`)
     );
   } catch (error) {
-    console.log("Error starting server:", error);
+    console.log("Error starting server:", error.message);
     db.close();
     process.exit(1);
   }

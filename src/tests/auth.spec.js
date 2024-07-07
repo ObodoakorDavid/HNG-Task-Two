@@ -230,12 +230,17 @@ describe("Token generation and verification", () => {
     expect(decoded.firstName).toBe(mockData.firstName);
     expect(decoded.lastName).toBe(mockData.lastName);
     expect(decoded.email).toBe(mockData.email);
+  });
+
+  it("Token should have correct expiration time", async () => {
+    const token = generateToken({ userId: testUserId, ...mockData });
+    const decoded = verifyToken(token);
 
     // Check if token has an expiration time
     const currentTime = Math.floor(Date.now() / 1000);
     expect(decoded.exp).toBeGreaterThan(currentTime);
 
-    // Check if token expires in about 1 hour
+    // Check if token expires in about 1 hour 
     const oneHourInSeconds = 3600;
     expect(decoded.exp - decoded.iat).toBeLessThanOrEqual(oneHourInSeconds);
   });

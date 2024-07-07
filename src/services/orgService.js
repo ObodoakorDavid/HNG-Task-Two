@@ -6,8 +6,6 @@ export default {
   getUserOrganisations: async function (userId) {
     const user = await User.findOne({ where: { userId } });
 
-    console.log({ user });
-
     const userWithOrgs = await User.findOne({
       where: { userId },
       include: {
@@ -18,8 +16,6 @@ export default {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       },
     });
-
-    console.log({ organisations: userWithOrgs.Organisations });
 
     return {
       status: "success",
