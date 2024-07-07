@@ -32,6 +32,10 @@ export default {
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
 
+    if (!organisation) {
+      throw customError.badRequestError(`${organisation} Not Found`);
+    }
+
     return {
       status: "success",
       message: "Organization fetched successfully",
