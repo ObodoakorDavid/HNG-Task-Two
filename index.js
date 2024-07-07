@@ -45,8 +45,9 @@ const startServer = async () => {
     );
   } catch (error) {
     console.log("Error starting server:", error.message);
+    console.error(error);
     db.close();
-    process.exit(1);
+    // process.exit(1);
   }
 };
 

@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
     {
       host: process.env.POSTGRES_HOST,
       dialect: "postgres",
+      logging: console.log,
       port: process.env.POSTGRES_PORT || 5432, // Ensure this is set if it's different from 5432
       dialectModule: pg,
       pool: {
