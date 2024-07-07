@@ -13,20 +13,31 @@ if (process.env.NODE_ENV === "development") {
     {
       host: "localhost",
       dialect: "postgres",
-      port: process.env.DB_PORT || "5432",
+      port: process.env.DB_PORT || 5432,
     }
   );
 } else {
-  db = new Sequelize(process.env.POSTGRES_URL, {
-    dialect: "postgres",
-    protocol: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
+  db = new Sequelize(
+    process.env.POSTGRES_DATABASE,
+    process.env.POSTGRES_USER,
+    process.env.POSTGRES_PASSWORD,
+    {
+      host: process.env.POSTGRES_HOST,
+      dialect: "postgres",
+      port: process.env.POSTGRES_PORT || 5432, // Ensure this is set if it's different from 5432
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000,
       },
-    },
-  });
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // Adjust based on your PostgreSQL setup
+        },
+      },
+    }
+  );
 }
 
 export default db;
