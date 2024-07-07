@@ -18,7 +18,14 @@ if (process.env.NODE_ENV === "development") {
   );
 } else {
   db = new Sequelize(process.env.POSTGRES_URL, {
-    dialectModule: pg,
+    dialect: "postgres",
+    protocol: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   });
 }
 
