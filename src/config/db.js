@@ -4,7 +4,7 @@ dotenv.config();
 
 let db;
 
-if (process.env.NODE_ENV === "development" || "test") {
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   db = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USERNAME,
