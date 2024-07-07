@@ -33,7 +33,9 @@ export default {
     });
 
     if (!organisation) {
-      throw customError.badRequestError(`${organisation} Not Found`);
+      throw customError.badRequestError(
+        `Organisation with this Id: ${orgId} Not Found`
+      );
     }
 
     return {
