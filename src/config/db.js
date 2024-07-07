@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
+import pg from "pg";
 
 let db;
 
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
       host: process.env.POSTGRES_HOST,
       dialect: "postgres",
       port: process.env.POSTGRES_PORT || 5432, // Ensure this is set if it's different from 5432
+      dialectModule: pg,
       pool: {
         max: 5,
         min: 0,
