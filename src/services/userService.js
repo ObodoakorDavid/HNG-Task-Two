@@ -2,6 +2,7 @@ import generateToken from "../config/generateToken.js";
 import { User, Organisation } from "../models/index.js";
 import { comparePassword, hashPassword } from "../utils/generalUtils.js";
 import { customError } from "../utils/customError.js";
+import isUUID from "../utils/isValidUUID.js";
 
 export default {
   // Register A New User
