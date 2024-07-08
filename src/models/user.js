@@ -10,10 +10,6 @@ const User = db.define("User", {
     primaryKey: true,
     unique: true,
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,

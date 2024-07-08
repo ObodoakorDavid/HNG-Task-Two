@@ -2,14 +2,6 @@ import { body } from "express-validator";
 import { handleValidationErrors } from "../middlewares/error.js";
 
 export const userSignUpValidator = [
-  body("username")
-    .exists()
-    .withMessage("username is required")
-    .notEmpty()
-    .withMessage("username can't be empty")
-    .isString()
-    .withMessage("username must be a string"),
-
   body("firstName")
     .exists()
     .withMessage("firstName is required")
@@ -43,8 +35,8 @@ export const userSignUpValidator = [
     .withMessage("password can't be empty")
     .isString()
     .withMessage("password must be a string"),
-  // .isLength({ min: 2 })
-  // .withMessage("Password must be at least 8 characters long"),
+
+  body("phone").optional().isString().withMessage("phone must be a string"),
 
   handleValidationErrors,
 ];
