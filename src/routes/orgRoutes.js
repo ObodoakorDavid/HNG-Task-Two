@@ -22,7 +22,7 @@ router
 
 router
   .route("/organisations/:orgId/users")
-  .post(addUserToOrganisation)
+  .post(isAuth, addUserToOrganisation)
   .all(methodNotAllowed);
 
 export default router;
