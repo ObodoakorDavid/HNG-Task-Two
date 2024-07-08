@@ -34,12 +34,25 @@ app.use("/api", orgRoutes);
 app.use(notFound);
 app.use(errorMiddleware);
 
+// Function to sync the database schema
+const syncDatabaseSchema = async () => {
+  try {
+    console.log("Synchronizing Database schema");
+    await db.sync({ force: true });
+    console.log("Database schema synchronized.");
+  } catch (error) {
+    console.error("Error synchronizing database schema:", error);
+    process.exit(1);
+  }
+};
+
 // Starts the server
 const startServer = async () => {
   try {
     console.log("Authenticating database connection...");
     await db.authenticate();
     console.log(`DB Connected!`);
+    await syncDatabaseSchema();
     app.listen(port, () =>
       console.log(`Server is Live! Running on PORT: ${port}`)
     );
