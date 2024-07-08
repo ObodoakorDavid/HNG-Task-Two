@@ -27,7 +27,7 @@ export default {
   // Get Organistion By Id
   getOrganisationById: async function (orgId) {
     if (!isUUID(orgId)) {
-      throw customError.badRequestError(
+      throw customError.notFoundError(
         `Organisation with this Id: ${orgId} Not Found`
       );
     }
@@ -40,7 +40,7 @@ export default {
     });
 
     if (!organisation) {
-      throw customError.badRequestError(
+      throw customError.notFoundError(
         `Organisation with this Id: ${orgId} Not Found`
       );
     }
@@ -86,13 +86,11 @@ export default {
     const user = await User.findOne({ where: { userId } });
 
     if (!user) {
-      throw customError.badRequestError(
-        `User with this Id:${userId} Not Found`
-      );
+      throw customError.notFoundError(`User with this Id:${userId} Not Found`);
     }
 
     if (!isUUID(orgId)) {
-      throw customError.badRequestError(
+      throw customError.notFoundError(
         `Organisation with this Id: ${orgId} Not Found`
       );
     }
@@ -104,7 +102,7 @@ export default {
     });
 
     if (!organisation) {
-      throw customError.badRequestError(
+      throw customError.notFoundError(
         `Organisation with this Id: ${orgId} Not Found`
       );
     }

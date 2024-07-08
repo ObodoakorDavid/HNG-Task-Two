@@ -13,6 +13,13 @@ export const customError = {
       statusCode: 401,
     };
   },
+  notFoundError: (message) => {
+    return {
+      status: "Not Found",
+      message,
+      statusCode: 404,
+    };
+  },
   internalServerError: (message) => {
     return {
       status: "Bad Request",
