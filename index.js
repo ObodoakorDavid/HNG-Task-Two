@@ -40,15 +40,13 @@ const startServer = async () => {
     console.log("Authenticating database connection...");
     await db.authenticate();
     console.log(`DB Connected!`);
-    await db.sync({ force: true });
-    console.log("Tables created!");
     app.listen(port, () =>
       console.log(`Server is Live! Running on PORT: ${port}`)
     );
   } catch (error) {
     console.log("Error starting server:", error.message);
     console.error(error);
-    db.close();
+    await db.close();
     // process.exit(1);
   }
 };
