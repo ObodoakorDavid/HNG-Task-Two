@@ -39,7 +39,7 @@ const startServer = async () => {
   try {
     console.log("Authenticating database connection...");
     await db.authenticate();
-    await db.sync();
+    await db.sync({ force: true });
     console.log(`DB Connected!`);
     app.listen(port, () =>
       console.log(`Server is Live! Running on PORT: ${port}`)
