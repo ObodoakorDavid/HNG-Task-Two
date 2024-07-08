@@ -1,5 +1,6 @@
 import { customError } from "../utils/customError.js";
 import { User, Organisation } from "../models/index.js";
+import isUUID from "../utils/isValidUUID.js";
 
 export default {
   // Gets All User's Organisation
@@ -25,6 +26,12 @@ export default {
   },
   // Get Organistion By Id
   getOrganisationById: async function (orgId) {
+    if (!isUUID(orgId)) {
+      throw customError.badRequestError(
+        `Organisation with this Id: ${orgId} Not Found`
+      );
+    }
+
     const organisation = await Organisation.findOne({
       where: {
         orgId,
@@ -81,6 +88,12 @@ export default {
     if (!user) {
       throw customError.badRequestError(
         `User with this Id:${userId} Not Found`
+      );
+    }
+
+    if (!isUUID(orgId)) {
+      throw customError.badRequestError(
+        `Organisation with this Id: ${orgId} Not Found`
       );
     }
 

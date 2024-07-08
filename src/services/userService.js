@@ -91,6 +91,18 @@ export default {
   getUserRecord: async function (userId, id) {
     const user = await User.findOne({ where: { userId: id } });
 
+    if (!isUUID(id)) {
+      throw customError.badRequestError(
+        `User with this Id: ${orgId} Not Found`
+      );
+    }
+
+    if (!isUUID(userId)) {
+      throw customError.badRequestError(
+        `User with this Id: ${orgId} Not Found`
+      );
+    }
+
     if (!user) {
       throw customError.badRequestError(`User with this Id:${id} Not Found`);
     }
