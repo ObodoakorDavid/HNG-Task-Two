@@ -21,7 +21,9 @@ export default {
     return {
       status: "success",
       message: "User organisations fetched successfully",
-      organisations: userWithOrgs.Organisations,
+      data: {
+        organisations: userWithOrgs.Organisations,
+      },
     };
   },
   // Get Organistion By Id
