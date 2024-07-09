@@ -188,7 +188,7 @@ describe("Organisation Access Control", () => {
       .set("Authorization", `Bearer ${accessToken}`);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty("organisations");
+    expect(response.body.data).toHaveProperty("organisations");
   });
 
   it("should allow access to single organization data for authorized user", async () => {
