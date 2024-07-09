@@ -47,7 +47,9 @@ const startServer = async () => {
   } catch (error) {
     console.log("Error starting server:", error.message);
     console.error(error);
-    await db.close();
+    console.log("Trying to restart the server");
+    startServer();
+    // await db.close();
     // process.exit(1);
   }
 };
